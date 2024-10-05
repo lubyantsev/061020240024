@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <script>
+        // Функция для скрытия сообщения через 3 секунды
+        function hideMessage() {
+            const message = document.getElementById('error-message');
+            if (message) {
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Запуск функции при загрузке страницы
+        window.onload = hideMessage;
+    </script>
+</head>
+<body>
+    <h1>Добро пожаловать!</h1>
+
+    {% if error %}
+        <div id="error-message" style="color: red;">{{ error }}</div>
+    {% endif %}
+
+    <!-- Форма для создания расписания -->
+    <form action="/create_schedule" method="POST">
+        <input type="text" name="new_password" placeholder="Новый пароль" required>
+        <button type="submit">Создать расписание</button>
+    </form>
+
+    <!-- Форма для просмотра расписания -->
+    <form action="/view_schedule" method="POST">
+        <input type="text" name="password" placeholder="Пароль расписания" required>
+        <button type="submit">Посмотреть расписание</button>
+    </form>
+</body>
+</html>
